@@ -3,58 +3,88 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Trailblazers Outdoor Gear</title>
+  <title>Copilot for a Smarter Service</title>
 
   <link href="./css/styles.css" rel="stylesheet" />
 
   <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+
+  <!-- added by Michael Jiang to bring copilot studio custom canvas into home page -->
+  <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+
   <script src="./js/main.js"></script>
 
   <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
 </head>
 
 <body>
   <div class="header">
-    <img src="images/Microsoft.png" alt="Logo" width="32" height="32" />
-    <span class="header__title">Trailblazers Outdoor Gear</span>
+    <img src="[PLEASE REPLACE BY YOUR OWN CUSTOMER'S BRANDING IMAGE]" alt="Logo" width="64" height="32" />
+    <span class="header__title"></span>
 
     <ul class="menu-items">
-      <li>HIKE</li>
-      <li>CAMP</li>
-      <li>CLIMB</li>
-      <li>CYCLE</li>
-      <li>SNOW</li>
-      <li>PADDLE</li>
-      <li>YOGA</li>
-      <li>CART (0)</li>
+      <li>OLE TVs</li>
+      <li>Wireless Earbuds</li>
+      <li>Speakers</li>
+      <li>Refrigerators</li>
+      <li>Monitors</li>
+      <li>Washing Machines</li>
+      <li>PC & Laptops</li>
+      <li>Dishwashers</li>
+      <li>Vacuum Cleaners</li>
+      <li>Water Purifiers</li>
     </ul>
   </div>
 
   <div class="title">
-    <h1>Shop Easily With Talking Avatar</h1>
+    <h1>Your Live Copilot Avatar</h1>
   </div>
 
   <div class="main">
     <div class="main-block">
-      <h2>Here are some things Talking Avatar can help you with:</h2>
+      <h2>Here are some things I can help you with:</h2>
 
       <div class="suggested-questions">
-        <button onclick="window.speak(`What is the warrenty for women's hiking boots?`)">
-          What is the warrenty for women's hiking boots?
+        <button onclick="window.speakMJ2(`I have an issue with my freezer?`)">
+          I have an issue with my freezer?
         </button>
 
-        <button onclick="window.speak(`Do you have a tent for two people?`)">
-          Do you have a tent for two people?
+        <button onclick="window.speakMJ2(`I have an issue with my TV?`)">
+          I have an issue with my TV?
         </button>
 
-        <button onclick="window.speak(`How many bonus points do I have?`)">
-          How many bonus points do I have?
+        <button onclick="window.speakMJ2(`Benefits of becoming LG member?`)">
+          Benefits of becoming LG member?
         </button>
 
-        <button onclick="window.speak(`When will my order arrive?`)">
-          When will my order arrive?
+        <button onclick="window.speakMJ2(`成为会员有哪些好处?`)">
+          成为会员有哪些好处?
         </button>
+
+        <button onclick="window.speakMJ2(`Premium Care 는 무엇을 보장합니까?`)">
+          Premium Care 는 무엇을 보장합니까?
+        </button>
+
+        <button onclick="window.speakMJ2(`プレミアムケアには何が含まれますか?`)">
+          プレミアムケアには何が含まれますか?
+        </button>
+
+        <button onclick="window.speakMJ2(`ระยะเวลาการรับประกันในตลาดสหรัฐอเมริกา`)">
+          ระยะเวลาการรับประกันในตลาดสหรัฐอเมริกา
+        </button>
+        
+        <button onclick="window.speakMJ2(`What is the weather like today?`)">
+          What is the weather like today?
+        </button>
+
+        <button onclick="window.speakMJ2(`Check my order status`)">
+          Check my order status
+        </button>
+
+        
       </div>
     </div>
 
@@ -63,7 +93,6 @@
       </div>
       <canvas id="canvas" width="720" height="1080" style="background-color: transparent;" hidden="hidden"></canvas>
       <canvas id="tmpCanvas" width="720" height="1080" hidden="hidden"></canvas>
-      
       <fluent-card class="record-card">
         <div class="outerbutton">
           <button id="startRecording" onclick="window.startRecording()" class="round-button">
@@ -72,7 +101,7 @@
         </div>
 
         <label id="spokenText" for="spokenText">
-          Press the mic to start talking
+          Press to start talking
         </label>
       </fluent-card>
     </div>
@@ -96,6 +125,182 @@
       </div>
     </div>
   </div>
+
+<!-- Added by Michael Jiang to infuse te Copilot Studio Canvas Code Afterwards -->
+<style>
+  #open-chat {
+      z-index: 99998;
+      position: fixed;
+      bottom: 20px;
+      right: 20px; /* Adjusted from 'right' to 'left' for left bottom corner */
+      background-color: #faf7ef;
+      color: #2540CE;
+      border: none;
+      border-radius: 50%;
+      width: 78px; /* Increased by 30% for a larger button */
+      height: 78px; /* Increased by 30% for a larger button */
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border: 2px solid white;
+      font-size: large;
+      font-family: 'Poppins', sans-serif;
+  }
+
+  #open-chat:active {
+      box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add an inset shadow for a pressed effect */
+      transform: translateY(2px); /* Move the button down a bit when pressed */
+  }
+
+
+/* Add a class for the chatbot image */
+  #open-chat img {
+      width: 80%; /* Adjust the size of the image */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 50%; /* Make the image round */
+  }
+
+  .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #FCB900;
+      color: #2540CE; /* whitesmoke; */
+      border-radius: 50%; /* 25px; */
+      width: 78px; /* Increased by 30% for a larger button */
+      height: 78px; /* Increased by 30% for a larger button */
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border: 2px solid white;
+      padding: 10px 20px;
+      z-index: 99998;
+      font-family: 'Poppins', sans-serif;
+  }
+
+.chat-button img {
+      width: 80%; /* Adjust the size of the image */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 50%; /* Make the image round */
+}
+
+.chat-button:active {
+      box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add an inset shadow for a pressed effect */
+      transform: translateY(2px); /* Move the button down a bit when pressed */
+}
+
+.chat-button:hover {
+    background-color: gray;
+}
+
+  .chat-container {
+      display: none;
+      z-index: 99999;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 400px;
+      height: 500px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      overflow: hidden;
+      opacity: 0; /* Set initial opacity to 0 */
+      transition: opacity 0.3s ease; /* Add a smooth transition effect */
+  }
+
+  .chat-container.show {
+  opacity: 1; /* Increase opacity to 1 when the .show class is added */
+  }
+
+  .chat-title {
+      background-color: whitesmoke;
+      color: grey;
+      padding: 30px 15px; /* Adjust the padding as needed */
+      font-size: 16px;
+      font-family: Segoe UI;
+      line-height: 20px;
+      display: flex;
+      justify-content: flex; /* Move the close button to the right */
+      align-items: center;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+  }
+
+  .chat-title h1 {
+      font-size: 16px;
+      color: whitesmoke;
+      line-height: 18px;
+      margin: 0;
+  }
+
+  .chat-window {
+      height: 420px;
+      overflow-y: auto
+  }
+
+  #chatbot-footer {
+      background-color: whitesmoke;
+      color: black;
+      font-size: small;
+      font-family: Segoe UI;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 20px;
+  }
+
+  #close-button {
+      cursor: pointer;
+      font-size: 20px;
+      padding-right: 2px; /* Add some padding for spacing */
+  }
+
+  .logo {
+      margin-right: 290px; /* Adjust spacing between the image and text */
+  }
+
+  .logo img {
+      max-width: 70px; /* Adjust the width of the image as needed */
+      height: auto;
+  }
+
+  #webchat {
+      height: calc(100% - 30px); /* Adjust the height to accommodate the header */
+      width: 100%;
+      font-size: medium;
+  }
+</style>
+
+<button id="open-chat" style="display: none;" onclick="showChat()">
+<img src="https://mjdemoblobstorageservice.blob.core.windows.net/images/copilot-studio.png?sp=r&st=2024-03-01T07:49:07Z&se=2099-03-01T15:49:07Z&spr=https&sv=2022-11-02&sr=b&sig=%2B2J%2BkF0tNBvKhp3lETawPJpHJ1GuhiNjdLqZAGg%2BmDA%3D" alt="Submit"></img>
+</button>
+
+<div class="chat-container" id="chat-container" style="display: block;">
+  <div class="chat-title">
+      <div class="logo">
+          <img src='https://mjdemoblobstorageservice.blob.core.windows.net/images/microsoft-logo.png?sp=r&st=2024-03-01T06:49:39Z&se=2099-03-01T14:49:39Z&spr=https&sv=2022-11-02&sr=b&sig=cbFmbJgwUD9LusMfQHlgDU2m0mTIcUKICI3xkqz8gjA%3D' alt="Logo">
+      </div>
+      <span id="close-button" onclick="hideChat()">X</span>
+  </div>
+  <div class="chat-window">
+      <div id="webchat" role="main"></div>
+  </div>
+  <div id="chatbot-footer">
+      <a href="https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio" target="_blank">Powered by Microsoft Copilot Studio</a>
+  </div>
+</div>
 </body>
 
 </html>
