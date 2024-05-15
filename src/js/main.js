@@ -57,20 +57,17 @@ function removeDocumentReferences(str) {
 
 // Setup WebRTC
 function setupWebRTC() {
-  // Create WebRTC peer connection
-  fetch("/api/getIceServerToken", {
+   // Create WebRTC peer connection
+   fetch("/api/getIceServerToken", {
     method: "POST"
   })
-    .then(response => response.json())
-    .then(response => { 
-      IceServerUsername = response.username
-      IceServerCredential = response.credential
-
+    .then(async res => {
+      const reponseJson = await res.json()
       peerConnection = new RTCPeerConnection({
         iceServers: [{
-          urls: [IceServerUrl],
-          username: IceServerUsername,
-          credential: IceServerCredential
+          urls: reponseJson["Urls"],
+          username: reponseJson["Username"],
+          credential: reponseJson["Password"]
         }]
       })
     
