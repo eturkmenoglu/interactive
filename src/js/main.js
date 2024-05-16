@@ -483,7 +483,7 @@ function makeBackgroundTransparent(timestamp) {
 
 // var theURL = "https://3954f7b6f94747839374deb1dd3a2d.ab.environment.api.powerplatform.com/powervirtualagents/botsbyschema/crabb_copilotCsV2/directline/token?api-version=2022-03-01-preview"; 
 //var theURL = "https://610ed68865d7e043af2bc9157dea82.09.environment.api.powerplatform.com/powervirtualagents/botsbyschema/crdf8_dubaiCopilot/directline/token?api-version=2022-03-01-preview";
-var theURL = "https://fcdef076dfb7456c84e8a6bf0a7df6.99.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cr640_duCopilot/directline/token?api-version=2022-03-01-preview";
+var theURL = "https://aad648ac97b1e507b52d7f0cb12621.1e.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cr2c4_duCopilot/directline/token?api-version=2022-03-01-preview";
 var environmentEndPoint = theURL.slice(0, theURL.indexOf('/powervirtualagents'));
 var apiVersion = theURL.slice(theURL.indexOf('api-version')).split('=')[1];
 var regionalChannelSettingsURL = `${environmentEndPoint}/powervirtualagents/regionalchannelsettings?api-version=${apiVersion}`;
