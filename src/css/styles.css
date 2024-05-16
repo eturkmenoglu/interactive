@@ -40,7 +40,7 @@ body {
     margin: 0;
     height: 100%;
     word-break: break-word;
-    background-image: url("../images/pexels-ian-beckley-2440024.png");
+    background-color: white;
     background-repeat: no-repeat;
     background-size: cover;
 }
