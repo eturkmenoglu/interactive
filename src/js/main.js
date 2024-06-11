@@ -487,7 +487,7 @@ function makeBackgroundTransparent(timestamp) {
 //var theURL = "https://aad648ac97b1e507b52d7f0cb12621.1e.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cr2c4_duCopilot/directline/token?api-version=2022-03-01-preview";
 //var theURL="https://fcdef076dfb7456c84e8a6bf0a7df6.99.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cr640_duCopilot/directline/token?api-version=2022-03-01-preview";
 
-var theURL="https://f02541c39febede6956922b98d58f4.57.environment.api.powerplatform.com/powervirtualagents/botsbyschema/crbbf_seyahatAsistani2/directline/token?api-version=2022-03-01-preview";
+var theURL="https://fcdef076dfb7456c84e8a6bf0a7df6.99.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cr640_dubaiBankCopilot/directline/token?api-version=2022-03-01-preview";
 
 var environmentEndPoint = theURL.slice(0, theURL.indexOf('/powervirtualagents'));
 var apiVersion = theURL.slice(theURL.indexOf('api-version')).split('=')[1];
