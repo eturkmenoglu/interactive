@@ -258,7 +258,7 @@ window.speakMJ = (text) => {
       .then(async language => {
         console.log(`Detected language: ${language}`);
 
-        const generatedResult = text;
+        const generatedResult = removeHttpLinks(text);
         
         language = default_lang;
 
@@ -304,7 +304,7 @@ window.speakMJ2 = (text) => {
 
         console.log(`Detected language: ${language}`);
         
-        const generatedResult = text;
+        const generatedResult = removeHttpLinks(text);
         store.dispatch( {
           type: 'WEB_CHAT/SEND_MESSAGE',
           payload:
@@ -348,7 +348,7 @@ window.speak = (text) => {
         language = default_lang;
         console.log(`Detected language: ${language}`);
 
-        const generatedResult = await generateText(text);
+        const generatedResult = await generateText(removeHttpLinks(text));
         
         let spokenTextssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyMultilingualNeural'><lang xml:lang="${language}">${generatedResult}</lang></voice></speak>`
 
