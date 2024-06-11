@@ -26,6 +26,8 @@ const TalkingAvatarStyle = "casual-sitting"
 //supported_languages = ["en-US", "ar-LB", "tr-TR", "ar-AE"] // The language detection engine supports a maximum of 4 languages
 supported_languages = [ "tr-TR"]
 
+default_lang = "tr-TR"
+
 let token
 
 const speechSynthesisConfig = SpeechSDK.SpeechConfig.fromEndpoint(new URL("wss://{region}.tts.speech.microsoft.com/cognitiveservices/websocket/v1?enableTalkingAvatar=true".replace("{region}", CogSvcRegion)))
@@ -217,7 +219,7 @@ window.startSession = () => {
 
 async function greeting() {
   addToConversationHistory("Hello, my name is Anna. How can I help you today?", "light")
-  let spokenText = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyNeural'>Hello, my name is Michael. How can I help you?</voice></speak>"
+  let spokenText = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='"+default_lang+"'><voice xml:lang='"+default_lang+"' xml:gender='Female' name='en-US-JennyNeural'>Merhaba ben Asli, size nasil yardimci olabilirim?</voice></speak>"
   avatarSynthesizer.speakSsmlAsync(spokenText, (result) => {
     if (result.reason === SpeechSDK.ResultReason.SynthesizingAudioCompleted) {
       console.log("Speech synthesized to speaker for text [ " + spokenText + " ]. Result ID: " + result.resultId)
@@ -246,6 +248,8 @@ window.speakMJ = (text) => {
 
         const generatedResult = text;
         
+        language = default_lang;
+
         let spokenTextssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyMultilingualNeural'><lang xml:lang="${language}">${generatedResult}</lang></voice></speak>`
 
         if (language == 'ar-AE') {
@@ -283,7 +287,11 @@ window.speakMJ2 = (text) => {
     })
       .then(response => response.text())
       .then(async language => {
+        
+        language = default_lang;
+
         console.log(`Detected language: ${language}`);
+        
         const generatedResult = text;
         store.dispatch( {
           type: 'WEB_CHAT/SEND_MESSAGE',
@@ -325,6 +333,7 @@ window.speak = (text) => {
     })
       .then(response => response.text())
       .then(async language => {
+        language = default_lang;
         console.log(`Detected language: ${language}`);
 
         const generatedResult = await generateText(text);
