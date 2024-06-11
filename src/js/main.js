@@ -236,6 +236,18 @@ async function greeting() {
   })
 }
 
+function removeHttpLinks(text) {
+  // Regular expression to match HTTP and HTTPS links
+  const linkPattern = /https?:\/\/[^\s]+/g;
+
+  // Replace the links with an empty string
+  const result = text.replace(linkPattern, '');
+
+  // Return the modified text
+  return result;
+}
+
+
 window.speakMJ = (text) => {
   async function speakMJ(text) {
     addToConversationHistory(text, 'light')
@@ -248,6 +260,8 @@ window.speakMJ = (text) => {
 
         const generatedResult = text;
         
+        generatedResult = removeHttpLinks(generatedResult);
+
         language = default_lang;
 
         let spokenTextssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyMultilingualNeural'><lang xml:lang="${language}">${generatedResult}</lang></voice></speak>`
@@ -293,6 +307,10 @@ window.speakMJ2 = (text) => {
         console.log(`Detected language: ${language}`);
         
         const generatedResult = text;
+
+        generatedResult = removeHttpLinks(generatedResult);
+
+
         store.dispatch( {
           type: 'WEB_CHAT/SEND_MESSAGE',
           payload:
@@ -338,6 +356,8 @@ window.speak = (text) => {
 
         const generatedResult = await generateText(text);
         
+        generatedResult = removeHttpLinks(generatedResult);
+
         let spokenTextssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyMultilingualNeural'><lang xml:lang="${language}">${generatedResult}</lang></voice></speak>`
 
         if (language == 'ar-AE') {
